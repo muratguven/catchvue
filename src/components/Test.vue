@@ -51,6 +51,12 @@ export default {
           Title: this.Title
         };
         console.log(formData);
+        let storageData = getLocalStorageData();
+        if(storageData==null){
+          storageData=[];
+        }
+        storageData.push(formData);
+        localStorage.setItem("products",JSON.stringify(storageData));
         this.$emit("product-submitted", formData);
         this.Id = null;
         this.Title = null;
@@ -58,4 +64,9 @@ export default {
     }
   }
 };
+
+function getLocalStorageData(){
+  let storageData = localStorage.getItem("products");
+  return JSON.parse(storageData);
+}
 </script>
