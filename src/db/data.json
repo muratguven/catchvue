@@ -1,0 +1,37 @@
+{
+"Users":[{
+
+    "id":1,
+    "userName":"Test User -1",
+    "email":"Test@vue.comm",
+    "image":"",
+    "Roles":[
+        {
+            "id":1,
+            "Title":"Marketing"
+        },
+        {
+            "id":2,
+            "Title":"Agent"
+        }
+    ]
+
+},
+{
+
+    "id":2,
+    "userName":"Admin",
+    "email":"Admin@vue.comm",
+    "image":"",
+    "Roles":[
+        {
+            "id":3,
+            "Title":"System Admin"
+        }
+    ]
+
+}
+]
+
+
+}

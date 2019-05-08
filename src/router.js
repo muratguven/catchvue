@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Work from './views/Work.vue'
+import Users from './views/Users.vue'
 
 Vue.use(Router)
 
@@ -27,6 +28,12 @@ export default new Router({
       name:'work',
       meta:{ layout:'main' },
       component:Work
+    },
+    {
+      path:'/users',
+      name:'users',
+      meta:{ layout:'main' },
+      component:Users
     }
   ]
 })
