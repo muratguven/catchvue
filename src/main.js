@@ -8,6 +8,8 @@ import jQuery from 'jquery'
 window.$ =window.jQuery = jQuery; 
 import 'popper.js'
 import 'bootstrap'
+import 'fontawesome'
+
 
 import Login from './layouts/Login.vue'
 import Main from './layouts/Main.vue'
