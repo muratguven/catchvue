@@ -63,18 +63,21 @@ export default {
   computed: {
     ...mapState({
       users: state => state.users.all,
-      error: state => state.users.error      
+      error: state => state.users.error
+           
     })
   },
   methods:{
     userAdded(added){
       // eslint-disable-next-line
-      console.log("added result:",added);
+      console.log("added result:", added);
+      
       if(added){
         // Modal'ı kapat.
         window.$('#userModal').modal('hide');
         // Success notification
         this.$noty.success("User saved!");
+        
       }
     }
   },

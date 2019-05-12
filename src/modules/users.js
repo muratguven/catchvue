@@ -3,8 +3,8 @@ const axios = require('axios');
 const API_URL = "http://localhost:3000/Users";
 const state ={
     all:[],
-    error:false,
-    added:false
+    error:false
+   
 };
 const getters = {};
 const mutations = {
@@ -14,9 +14,6 @@ const mutations = {
     },
     setError(state,error){
         state.error = error;
-    },
-    userAdded(state, added){
-        state.added = added;
     }
 };
 const actions = {
@@ -41,11 +38,11 @@ const actions = {
         axios.post(API_URL, user)
         .then(function(){
             
-            /* burada added state'ini değiştirmek için userAdded mutation methodunu çalıştırıyorum.
+            /* 
             Ayrıca yeni user list için action dispatch ediyorum.
             */
-           commit('userAdded',true);
-            store.dispatch('users/getAllUsers');
+          
+           store.dispatch('users/getAllUsers');
         })
         .catch(function(error){
             // eslint-disable-next-line no-console

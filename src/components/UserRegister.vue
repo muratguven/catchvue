@@ -33,11 +33,11 @@
 <script>
 
 export default {
-  props:{
-    userId:{
-      type:Number,
-      required:false,
-      default(){
+  props: {
+    userId: {
+      type: Number,
+      required: false,
+      default() {
         return 0;
       }
     }
@@ -50,7 +50,6 @@ export default {
       roles: null
     };
   },
-  
   methods: {
     onSubmit() {
       let user = {
@@ -59,25 +58,31 @@ export default {
         image: this.image,
         roles: this.roles
       };
-      this.$store.dispatch("users/registerUser", user);
+
+      
+      this.$store.dispatch("users/registerUser", user).then(()=>{
+        
+        this.$emit("IsAdded",true);
+
+      });
+      // eslint-disable-next-line
+
       /* Burada bir üst component'e isAdded event 'ı oluşturuyorum. 
       Bir üst component bu event ile modal'ı kapatıp notification gönderecek.
-      */ 
-     let added = this.$store.state.users.added;
-     // eslint-disable-next-line
-     console.log(added);
-      this.$emit('IsAdded', added);
-      // this.clearUserForm();
+      */
+      
+        //let added = this.$store.state.users.added;
+        // eslint-disable-next-line
+        // console.log("In UserRegister:", this.added);
+        // this.$emit("IsAdded");
+        // this.clearUserForm();
+     
     },
-    clearUserForm(){
+    clearUserForm() {
       this.username = null;
-      this.email=null;
+      this.email = null;
     }
   },
-  created(){
-    if(this.userId>0){
-
-    }
-  }
+  created() {}
 };
 </script>
