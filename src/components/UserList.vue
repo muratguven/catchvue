@@ -14,19 +14,24 @@
               <th>Id</th>
               <th>User Name</th>
               <th>Email</th>
+              <th>#</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="user in users" :key="user.id">
               <td>{{user.id}}</td>
-              <td>{{user.userName}}</td>
+              <td>{{user.username}}</td>
               <td>{{user.email}}</td>
+              <td> 
+                <button class="btn btn-sm btn-outline-info mr-2"><i class="fas fa-user-edit"></i></button>
+                <button class="btn btn-sm btn-outline-danger"><i class="far fa-trash-alt"></i></button>
+               </td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="col-sm-12">
-        <button class="btn btn-sm btn-light float-right" data-toggle="modal" data-target="#userModal">
+        <button class="btn btn-sm btn-outline-primary float-right" data-toggle="modal" data-target="#userModal">
           <i class="fas fa-plus"></i>
         </button>
       </div>
@@ -42,13 +47,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+     <UserRegister @IsAdded="userAdded" />
     </div>
   </div>
 </div>
@@ -57,16 +56,33 @@
   </div>
 </template>
 <script>
+import UserRegister from '@/components/UserRegister.vue';
 import { mapState } from "vuex";
+
 export default {
   computed: {
     ...mapState({
       users: state => state.users.all,
-      error: state => state.users.error
+      error: state => state.users.error      
     })
+  },
+  methods:{
+    userAdded(added){
+      // eslint-disable-next-line
+      console.log("added result:",added);
+      if(added){
+        // Modal'ı kapat.
+        window.$('#userModal').modal('hide');
+        // Success notification
+        this.$noty.success("User saved!");
+      }
+    }
   },
   created() {
     this.$store.dispatch("users/getAllUsers");
+  },
+  components:{
+    UserRegister
   }
 };
 </script>

@@ -9,15 +9,16 @@ window.$ =window.jQuery = jQuery;
 import 'popper.js'
 import 'bootstrap'
 import 'fontawesome'
+import VueNoty from 'vuejs-noty'
 
-
+import 'vuejs-noty/dist/vuejs-noty.css'
 import Login from './layouts/Login.vue'
 import Main from './layouts/Main.vue'
 
 Vue.component('login',Login)
 Vue.component('main-layout',Main)
 
-
+Vue.use(VueNoty)
 Vue.config.productionTip = true
 
 new Vue({
