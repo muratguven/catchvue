@@ -23,7 +23,7 @@
               <td>{{user.username}}</td>
               <td>{{user.email}}</td>
               <td> 
-                <button class="btn btn-sm btn-outline-info mr-2"><i class="fas fa-user-edit"></i></button>
+                <button class="btn btn-sm btn-outline-info mr-2"  @click="updateUser(user.id)" ><i class="fas fa-user-edit"></i></button>
                 <button class="btn btn-sm btn-outline-danger"><i class="far fa-trash-alt"></i></button>
                </td>
             </tr>
@@ -47,7 +47,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-     <UserRegister @IsAdded="userAdded" />
+     <UserRegister @IsAdded="userAdded" :userId="userid"/>
     </div>
   </div>
 </div>
@@ -60,6 +60,11 @@ import UserRegister from '@/components/UserRegister.vue';
 import { mapState } from "vuex";
 
 export default {
+  data(){
+    return {
+      userid:0
+    }
+  },
   computed: {
     ...mapState({
       users: state => state.users.all,
@@ -79,6 +84,11 @@ export default {
         this.$noty.success("User saved!");
         
       }
+    },
+    updateUser(id){
+
+      this.userid = id
+      window.$('#userModal').modal('show');
     }
   },
   created() {

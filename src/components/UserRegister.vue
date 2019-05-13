@@ -31,7 +31,7 @@
 </template>
 
 <script>
-
+import { mapState, mapActions } from 'vuex'
 export default {
   props: {
     userId: {
@@ -43,12 +43,24 @@ export default {
     }
   },
   data() {
+
+    if(this.userId>0){
+      this.$store.dispatch('users/getUser', this.userId);
+      return this.userdata;
+    }
+
     return {
       username: null,
       email: null,
       image: null,
       roles: null
     };
+  },
+  computed:{
+    ...mapState({
+
+      userdata: state=>state.users.user
+    })
   },
   methods: {
     onSubmit() {

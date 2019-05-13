@@ -3,9 +3,10 @@ const axios = require('axios');
 const API_URL = "http://localhost:3000/Users";
 const state ={
     all:[],
-    error:false
-   
+    error:false,
+    user:{}
 };
+
 const getters = {};
 const mutations = {
 
@@ -14,6 +15,9 @@ const mutations = {
     },
     setError(state,error){
         state.error = error;
+    },
+    setUser(state, user){
+        state.user = user;
     }
 };
 const actions = {
@@ -49,6 +53,21 @@ const actions = {
             console.log(error);
             commit('setError',true);
         });
+    },
+    getUser({commit}, id){
+        // eslint-disable-next-line
+        console.log("id",id);
+        this.axios.post(API_URL,id)
+            .then(function(response){
+                 // eslint-disable-next-line
+                console.log("user response",response);
+                commit('setUser',response);
+            })
+            .catch(function(error){
+                // eslint-disable-next-line no-console
+                console.log(error);
+                commit('setError',true);
+            });
     }
 };
 
