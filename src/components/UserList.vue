@@ -89,6 +89,7 @@ export default {
 
       this.userid = id
       window.$('#userModal').modal('show');
+       this.$store.dispatch('users/getUser', id);
     }
   },
   created() {

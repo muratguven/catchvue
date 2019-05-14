@@ -57,11 +57,11 @@ const actions = {
     getUser({commit}, id){
         // eslint-disable-next-line
         console.log("id",id);
-        this.axios.post(API_URL,id)
+        axios.get(API_URL+'?id='+id)
             .then(function(response){
                  // eslint-disable-next-line
-                console.log("user response",response);
-                commit('setUser',response);
+                console.log("user response",response.data);
+                commit('setUser',response.data[0]);
             })
             .catch(function(error){
                 // eslint-disable-next-line no-console
