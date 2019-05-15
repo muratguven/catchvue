@@ -31,7 +31,8 @@
 </template>
 
 <script>
-// import { mapState, mapActions } from 'vuex'
+const axios = require("axios");
+const API_URL = "http://localhost:3000/Users";
 export default {
   props: {
     userId: {
@@ -50,13 +51,6 @@ export default {
       roles: null
     };
   },
-  computed: {
-    userdata() {
-      // eslint-disable-next-line
-      console.log(this.$store.state.users.user);
-      return this.$store.state.users.user;
-    }
-  },
   methods: {
     onSubmit() {
       let user = {
@@ -69,26 +63,28 @@ export default {
       this.$store.dispatch("users/registerUser", user).then(() => {
         this.$emit("IsAdded", true);
       });
-      // eslint-disable-next-line
-
-      /* Burada bir üst component'e isAdded event 'ı oluşturuyorum. 
-      Bir üst component bu event ile modal'ı kapatıp notification gönderecek.
-      */
-
-      //let added = this.$store.state.users.added;
-      // eslint-disable-next-line
-      // console.log("In UserRegister:", this.added);
-      // this.$emit("IsAdded");
-      // this.clearUserForm();
     },
     clearUserForm() {
       this.username = null;
       this.email = null;
+    },
+    setForUpdate(data) {
+      
+
+      this.username = data.username;
+      this.email = data.email;
+      this.image = data.image;
+      this.roles = data.roles;
     }
   },
-  created() {
-    // eslint-disable-next-line
-    console.log("created...");
+  watch: {
+    userId: function() {
+      let self = this;
+      axios.get(API_URL + "?id=" + this.userId).then(function(response) {
+        self.setForUpdate(response.data[0]);
+        
+      });
+    }
   }
 };
 </script>

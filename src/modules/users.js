@@ -55,12 +55,10 @@ const actions = {
         });
     },
     getUser({commit}, id){
-        // eslint-disable-next-line
-        console.log("id",id);
+        
         axios.get(API_URL+'?id='+id)
             .then(function(response){
-                 // eslint-disable-next-line
-                console.log("user response",response.data);
+                
                 commit('setUser',response.data[0]);
             })
             .catch(function(error){
