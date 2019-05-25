@@ -54,23 +54,27 @@ export default {
   methods: {
     onSubmit() {
       let user = {
+        id: this.userId,
         username: this.username,
         email: this.email,
         image: this.image,
         roles: this.roles
       };
-
-      this.$store.dispatch("users/registerUser", user).then(() => {
-        this.$emit("IsAdded", true);
-      });
+      if (this.userId || this.userId > 0) {
+        this.$store.dispatch('users/updateUser',user).then(()=>{
+          this.$emit("IsAdded",true);
+        });
+      } else {
+        this.$store.dispatch("users/registerUser", user).then(() => {
+          this.$emit("IsAdded", true);
+        });
+      }
     },
     clearUserForm() {
       this.username = null;
       this.email = null;
     },
     setForUpdate(data) {
-      
-
       this.username = data.username;
       this.email = data.email;
       this.image = data.image;
@@ -82,7 +86,6 @@ export default {
       let self = this;
       axios.get(API_URL + "?id=" + this.userId).then(function(response) {
         self.setForUpdate(response.data[0]);
-        
       });
     }
   }

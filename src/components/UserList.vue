@@ -24,7 +24,7 @@
               <td>{{user.email}}</td>
               <td> 
                 <button class="btn btn-sm btn-outline-info mr-2"  @click="updateUser(user.id)" ><i class="fas fa-user-edit"></i></button>
-                <button class="btn btn-sm btn-outline-danger"><i class="far fa-trash-alt"></i></button>
+                <button class="btn btn-sm btn-outline-danger" @click="deleteUser(user.id)"><i class="far fa-trash-alt"></i></button>
                </td>
             </tr>
           </tbody>
@@ -90,6 +90,12 @@ export default {
       this.userid = id
       window.$('#userModal').modal('show');
        this.$store.dispatch('users/getUser', id);
+    },
+    deleteUser(id){
+      this.$store.dispatch('users/deleteUser',id);
+      // window.$('#userModal').modal('show');
+      // Success notification
+        this.$noty.success("User deleted!");
     }
   },
   created() {

@@ -4,7 +4,9 @@ const API_URL = "http://localhost:3000/Users";
 const state ={
     all:[],
     error:false,
-    user:{}
+    user:{},
+    updated:false,
+    deleted:false
 };
 
 const getters = {};
@@ -18,6 +20,12 @@ const mutations = {
     },
     setUser(state, user){
         state.user = user;
+    },
+    isUpdated(state, updated){
+        state.updated= updated;
+    },
+    isDeleted(state,deleted){
+        state.deleted = deleted;
     }
 };
 const actions = {
@@ -66,6 +74,27 @@ const actions = {
                 console.log(error);
                 commit('setError',true);
             });
+    },
+    updateUser({commit},user){
+        axios.put(API_URL+'/'+user.id, user)
+        .then(function(){
+            commit('isUpdated',true);
+            // Update User List 
+            store.dispatch('users/getAllUsers');
+        })
+        .catch(function(error){
+            // eslint-disable-next-line no-console
+            console.log(error);
+            commit('setError',true);
+        });
+    },
+    deleteUser({commit},id){
+        axios.delete(API_URL+'/'+id)
+        .then(function(){
+            commit('isDeleted',true);
+            // Update User List 
+            store.dispatch('users/getAllUsers');
+        });
     }
 };
 

@@ -18,9 +18,11 @@
         <router-link to="/work" class="nav-link">Work</router-link>
       </li>
       <li class="nav-item">
-        <router-link to="/users" class="nav-link">Users</router-link>
+        <router-link to="my-users" class="nav-link">Users</router-link>
       </li>
-      
+      <li class="nav-item">
+        <router-link to="case-products" class="nav-link">Products</router-link>
+      </li>
     </ul>
   </div>
 
